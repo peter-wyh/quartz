@@ -11,8 +11,8 @@ cd "$QUARTZ_DIR"
 rm -rf content
 cp -R "$OBSIDIAN_VAULT/" content/
 
-# 2. Stage all changes
-git add content/ quartz.config.ts
+# 2. Stage all changes (including deletions)
+git add -A content/ quartz.config.ts
 
 # 3. Check if there are changes to commit
 if git diff --cached --quiet; then
