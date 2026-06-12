@@ -140,12 +140,14 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
       const fp = joinSegments("static", "contentIndex") as FullSlug
       const simplifiedIndex = Object.fromEntries(
         Array.from(linkIndex).map(([slug, content]) => {
-          // remove description and from content index as nothing downstream
-          // actually uses it. we only keep it in the index as we need it
-          // for the RSS feed
-          delete content.description
-          delete content.date
-          return [slug, content]
+          return [slug, {
+            slug: content.slug,
+            filePath: content.filePath,
+            title: content.title,
+            links: content.links,
+            tags: content.tags,
+            content: "",
+          }]
         }),
       )
 
